@@ -1,0 +1,26 @@
+# --- Course data must never enter this repo (it lives in ~/StudyNotebook) ---
+/sv-data/
+/data/
+*.vtt
+*.srt
+*.har
+*.apkg
+*.mp4
+*.webm
+*.m4a
+course.json
+*.state.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+node_modules/
+
+# Local config (points at your data root; may hold paths only, never secrets)
+sv.toml
+pages/
+work/
+notebook/

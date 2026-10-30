@@ -1,0 +1,10 @@
+{
+  "name": "study-notebook",
+  "version": "0.2.0",
+  "description": "Turn the Coursera courses you're enrolled in into one editable study notebook: teach-first module pages, a course map, a mind map and question practice, adapted to the course type.",
+  "author": { "name": "reportedguy" },
+  "homepage": "https://github.com/reportedguy/study-notebook",
+  "repository": "https://github.com/reportedguy/study-notebook",
+  "license": "MIT",
+  "keywords": ["coursera", "study", "notes", "learning"]
+}

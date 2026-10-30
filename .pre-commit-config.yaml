@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: block-course-data
+        name: Block Coursera course data
+        entry: python tools/precommit_block_course_data.py
+        language: system
+        pass_filenames: true
