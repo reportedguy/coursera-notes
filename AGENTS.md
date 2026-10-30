@@ -1,6 +1,6 @@
 # Agent instructions
 
-This repo is the **Study Notebook** tool. When the user gives a Coursera link or asks for notes from a Coursera course, read `skills/study-notebook/SKILL.md` and follow it exactly. The other skills in `skills/` are its steps.
+This repo is **coursera-notes**, the Study Notebook tool. When the user gives a Coursera link or asks for notes from a Coursera course, read `skills/study-notebook/SKILL.md` and follow it exactly. The other skills in `skills/` are its steps.
 
 If you cannot start subagents, do the per-module steps one after another yourself.
 

@@ -1,0 +1,21 @@
+name: Course-type profile
+description: A kind of course whose notes should be structured differently
+labels: [profile]
+body:
+  - type: input
+    id: type
+    attributes:
+      label: Kind of course
+      placeholder: "e.g. law, nursing, music theory"
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: What today's pages get wrong for it
+      description: Describe, don't paste course content.
+  - type: textarea
+    id: sections
+    attributes:
+      label: Sections a page should have
+      placeholder: "e.g. Case summary · Rule · Application · Exam traps"

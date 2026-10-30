@@ -1,12 +1,12 @@
 {
-  "name": "study-notebook",
+  "name": "coursera-notes",
   "description": "Study Notebook: turn the Coursera courses you're enrolled in into one editable study notebook.",
   "owner": {
     "name": "reportedguy"
   },
   "plugins": [
     {
-      "name": "study-notebook",
+      "name": "coursera-notes",
       "source": "./",
       "description": "Coursera course link in, a self-contained editable study notebook out."
     }

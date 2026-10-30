@@ -1,0 +1,466 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Notebook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style id="css">
+/* Notion-style workspace: warm-gray sidebar on the left, borderless always-editable page on the right. Tokens follow the Notion DESIGN.md. */
+:root{
+  --canvas:#ffffff;--surface:#f6f5f4;--surface-soft:#fafaf9;--hover:rgba(55,53,47,.08);--hover-strong:rgba(55,53,47,.14);
+  --ink:#37352f;--ink-strong:#1a1a1a;--slate:#5d5b54;--steel:#787671;--stone:#a4a097;
+  --hairline:#e5e3df;--hairline-soft:#ede9e4;--hairline-strong:#c8c4be;
+  --primary:#5645d4;--primary-pressed:#4534b3;--on-primary:#ffffff;--link:#0075de;
+  --sky:#dcecfa;--peach:#ffe8d4;--rose:#fde0ec;--lavender:#e6e0f5;--mint:#d9f3e1;--mark:#f9e79f;
+  --orange-deep:#793400;--error:#e03131;--success:#1aae39;
+  --shadow-pop:rgba(15,15,15,.16) 0 16px 48px -8px,rgba(15,15,15,.08) 0 0 0 1px;
+  --font:"Inter","Notion Sans",-apple-system,system-ui,"Segoe UI",Helvetica,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --canvas:#191919;--surface:#202020;--surface-soft:#1e1e1e;--hover:rgba(255,255,255,.055);--hover-strong:rgba(255,255,255,.1);
+  --ink:#e3e2e0;--ink-strong:#f1f0ee;--slate:#b5b3ad;--steel:#9b9a97;--stone:#7f7d78;
+  --hairline:#2f2f2f;--hairline-soft:#2a2a2a;--hairline-strong:#3f3f3f;
+  --primary:#7b6cf0;--primary-pressed:#6a5ae0;--on-primary:#ffffff;--link:#529cca;
+  --sky:#1d2d3c;--peach:#3a2a1c;--rose:#3a1f2b;--lavender:#2a2540;--mint:#1c3326;--mark:#5c4b14;
+  --orange-deep:#f0b07a;--error:#ff6b6b;--success:#4cc46a;
+  --shadow-pop:rgba(0,0,0,.5) 0 16px 48px -8px,rgba(255,255,255,.08) 0 0 0 1px;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --canvas:#191919;--surface:#202020;--surface-soft:#1e1e1e;--hover:rgba(255,255,255,.055);--hover-strong:rgba(255,255,255,.1);
+  --ink:#e3e2e0;--ink-strong:#f1f0ee;--slate:#b5b3ad;--steel:#9b9a97;--stone:#7f7d78;
+  --hairline:#2f2f2f;--hairline-soft:#2a2a2a;--hairline-strong:#3f3f3f;
+  --primary:#7b6cf0;--primary-pressed:#6a5ae0;--on-primary:#ffffff;--link:#529cca;
+  --sky:#1d2d3c;--peach:#3a2a1c;--rose:#3a1f2b;--lavender:#2a2540;--mint:#1c3326;--mark:#5c4b14;
+  --orange-deep:#f0b07a;--error:#ff6b6b;--success:#4cc46a;
+  --shadow-pop:rgba(0,0,0,.5) 0 16px 48px -8px,rgba(255,255,255,.08) 0 0 0 1px;color-scheme:dark}
+html,body{height:100%}
+body{background:var(--canvas);color:var(--ink);font:16px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--canvas)}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100%}
+
+/* Sidebar */
+.side{background:var(--surface);border-right:1px solid var(--hairline-soft);padding-block:12px 24px;padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:8px;position:sticky;top:0;height:100vh;overflow-y:auto;font-size:14px}
+.brand{display:flex;align-items:center;gap:8px;padding:6px 10px 14px;font-weight:600;color:var(--ink-strong)}
+.brand i{width:22px;height:22px;border-radius:6px;background:var(--ink-strong);color:var(--canvas);display:grid;place-items:center;font:700 13px var(--font);font-style:normal}
+.course{display:flex;align-items:center;gap:6px;width:100%;padding:5px 10px;margin-top:6px;border:0;border-radius:6px;background:none;color:var(--steel);font:600 12px var(--font);text-align:left;cursor:pointer}
+.course:hover{background:var(--hover);color:var(--ink)}
+.course .chev{display:inline-block;transition:transform .15s;font-size:9px;width:10px}
+.course[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.nav a{display:flex;gap:8px;align-items:flex-start;padding:5px 10px 5px 26px;border-radius:6px;color:var(--slate);text-decoration:none;line-height:1.35}
+.nav a:hover{background:var(--hover)}
+.nav a[aria-current="page"]{background:var(--hover-strong);color:var(--ink-strong);font-weight:500}
+.nav .ico{width:16px;flex:none;color:var(--steel);text-align:center;font-size:13px}
+
+/* Page */
+.main{min-width:0;padding-block:12px 120px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:8px;min-height:40px;margin:0 -16px 8px;padding:0 16px;background:var(--canvas);font-size:13.5px;color:var(--steel)}
+.crumb{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.saved{font-size:12.5px;color:var(--stone)}
+.page{max-width:720px;margin:0 auto}
+.page.wide{max-width:1100px}
+h1.title{font:700 clamp(30px,4.4vw,40px)/1.2 var(--font);letter-spacing:-.5px;color:var(--ink-strong);margin:28px 0 6px;text-wrap:balance}
+.lede{color:var(--slate);margin:0 0 18px}
+.ghost{font:500 14px var(--font);padding:5px 9px;border-radius:6px;border:0;background:none;color:var(--steel);cursor:pointer}
+.ghost:hover{background:var(--hover);color:var(--ink)}
+.btn{font:500 14px/1.3 var(--font);padding:8px 14px;border-radius:8px;border:1px solid var(--hairline-strong);background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--hover)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.primary:hover{background:var(--primary-pressed)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* Document blocks */
+.docwrap{position:relative}
+.doc{outline:none;caret-color:var(--ink-strong);padding-bottom:40vh}
+.doc>*{margin:0 0 4px;padding:2px 2px}
+.doc p{margin:2px 0 6px}
+.doc h2{font:600 24px/1.3 var(--font);letter-spacing:-.25px;color:var(--ink-strong);margin:30px 0 6px}
+.doc h3{font:600 19px/1.35 var(--font);color:var(--ink-strong);margin:20px 0 4px}
+.doc ul,.doc ol{padding-left:26px;margin:2px 0 8px}
+.doc li{margin:2px 0;padding-left:2px}
+.doc li>ul,.doc li>ol{margin-top:2px}
+.doc strong{font-weight:600;color:var(--ink-strong)}
+.doc a{color:inherit;text-decoration:underline;text-decoration-color:var(--hairline-strong);text-underline-offset:2px}
+.doc a:hover{color:var(--link);text-decoration-color:currentColor}
+.doc hr{border:0;border-top:1px solid var(--hairline);margin:16px 0}
+.doc code{font:.9em/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--hover);color:var(--ink-strong);padding:1px 5px;border-radius:4px}
+.doc pre{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:8px;padding:12px 16px;margin:8px 0 12px;overflow-x:auto}
+.doc pre code{background:none;padding:0;font-size:14px;color:var(--ink)}
+.doc blockquote,.doc .callout{display:block;border-radius:8px;padding:14px 16px;margin:8px 0}
+.doc blockquote{background:var(--lavender);font-size:17px;color:var(--ink-strong)}
+.doc blockquote p{margin:0}
+.doc .callout.ex{background:var(--sky)}
+.doc .callout.warn{background:var(--peach)}
+.doc .callout.note{background:var(--surface)}
+.doc .callout strong:first-child{color:var(--ink-strong)}
+.doc ul.mistakes{background:var(--rose);border-radius:8px;padding:12px 16px 12px 36px}
+.tablewrap{overflow-x:auto;margin:8px 0 12px}
+.doc table{border-collapse:collapse;width:100%;font-size:14px;border:1px solid var(--hairline)}
+.doc th{text-align:left;font-weight:600;background:var(--surface-soft);color:var(--steel);border:1px solid var(--hairline);padding:7px 10px}
+.doc td{border:1px solid var(--hairline);padding:7px 10px;vertical-align:top}
+.doc img{display:block;max-width:100%;border-radius:4px;margin:12px 0}
+.doc .mermaid{background:#fff;padding:12px;border:1px solid var(--hairline);border-radius:4px;margin:12px 0;overflow-x:auto;text-align:center}
+.doc img[src^="data:image/svg"]{background:#fff;padding:12px;border:1px solid var(--hairline)}
+.doc li.task{list-style:none;margin-left:-24px;display:flex;gap:8px;align-items:flex-start}
+.doc li.task input{margin-top:5px;width:16px;height:16px;flex:none;accent-color:var(--primary);cursor:pointer}
+.doc li.task:has(input:checked){color:var(--steel);text-decoration:line-through;text-decoration-color:var(--stone)}
+mark{background:var(--mark);color:inherit;padding:0 1px;border-radius:2px}
+.doc [data-ph]:empty::before{content:attr(data-ph);color:var(--stone);pointer-events:none}
+
+/* Editing chrome (lives outside the document so it is never saved) */
+.handle{position:absolute;display:none;gap:1px;z-index:4}
+.handle button{width:22px;height:24px;border:0;border-radius:4px;background:none;color:var(--stone);cursor:pointer;font:16px/1 var(--font);padding:0}
+.handle button:hover{background:var(--hover);color:var(--ink)}
+.pop{position:absolute;z-index:20;background:var(--canvas);border-radius:8px;box-shadow:var(--shadow-pop);padding:6px;min-width:200px;font-size:14px}
+.pop .lbl{font:600 11px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--stone);padding:6px 8px 4px}
+.pop button{display:flex;align-items:center;gap:10px;width:100%;padding:6px 8px;border:0;border-radius:6px;background:none;color:var(--ink);font:400 14px var(--font);text-align:left;cursor:pointer}
+.pop button:hover,.pop button.on{background:var(--hover)}
+.pop button .k{width:20px;text-align:center;color:var(--steel);font-weight:600}
+.pop button.danger{color:var(--error)}
+.pop hr{border:0;border-top:1px solid var(--hairline);margin:4px 0}
+.selbar{position:absolute;z-index:20;display:flex;gap:2px;padding:4px;background:var(--canvas);border-radius:8px;box-shadow:var(--shadow-pop)}
+.selbar button{min-width:30px;height:28px;border:0;border-radius:5px;background:none;color:var(--ink);font:600 14px var(--font);cursor:pointer;padding:0 6px}
+.selbar button:hover{background:var(--hover)}
+
+/* Question practice */
+.qa-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}
+.qa-tools select{font:500 14px var(--font);padding:7px 10px;border-radius:8px;border:1px solid var(--hairline-strong);background:var(--canvas);color:var(--ink)}
+.count{font-size:13.5px;color:var(--steel);margin-left:auto}
+.q{border:1px solid var(--hairline);border-radius:12px;padding:16px 18px;margin:12px 0;background:var(--canvas)}
+.q .meta{display:flex;align-items:center;gap:8px}
+.tag{font:600 12px var(--font);padding:2px 8px;border-radius:6px;background:var(--lavender);color:var(--ink-strong)}
+.tag.multi{background:var(--peach)}
+.q .meta .sp{flex:1}
+.q p{margin:10px 0 8px;font-weight:500;color:var(--ink-strong)}
+.q ol{list-style:none;padding:0;margin:0 0 10px;counter-reset:o}
+.q li.opt{counter-increment:o;display:flex;gap:10px;padding:7px 10px;margin:4px 0;border:1px solid var(--hairline);border-radius:8px;cursor:pointer}
+.q li.opt::before{content:counter(o,upper-alpha);font-weight:600;color:var(--steel);width:14px;flex:none}
+.q li.opt:hover{background:var(--hover)}
+.q li.picked{border-color:var(--primary);background:var(--lavender)}
+.q li.right{border-color:var(--success);background:var(--mint)}
+.q li.right::before{color:var(--success)}
+.q li.wrong{border-color:var(--error);background:var(--rose)}
+.q.done li.opt{cursor:default}
+.q .why{font-size:14.5px;color:var(--slate);margin:8px 0 0;padding:10px 12px;background:var(--surface);border-radius:8px}
+.verdict{font-weight:600;margin-right:4px}
+.dots{width:28px;height:26px;border:0;border-radius:6px;background:none;color:var(--stone);cursor:pointer;font:700 15px/1 var(--font);letter-spacing:1px}
+.dots:hover{background:var(--hover);color:var(--ink)}
+
+/* Mind map */
+.mm{border:1px solid var(--hairline);border-radius:12px;height:min(74vh,780px);overflow:hidden;background:var(--canvas)}
+.mm svg{width:100%;height:100%;--markmap-text-color:var(--ink);color:var(--ink)}
+
+.menu{display:none}
+.empty{color:var(--steel);text-align:center;padding:40px 0}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--hairline);padding-right:max(8px,env(safe-area-inset-right,0px))}
+  .side .nav{display:none}.side.open .nav{display:block}
+  .menu{display:inline-block;margin-left:auto}
+  .brand{padding-bottom:6px}
+  .handle{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="shell" id="root"></div>
+<script id="state" type="application/json">{"courses": [{"key": "planning-a-small-project", "title": "Planning a Small Project (sample)", "pages": [{"id": "m1", "kind": "module", "nav": "Defining the project", "title": "Module 1: Defining the project", "md": "> This module lets you turn a vague request into a project with a clear goal, firm boundaries and the right people involved.\n\n## What you'll be able to do\n- Write a goal that anyone can check at the end of the project.\n- Draw the line between what the project delivers and what it doesn't.\n- Find every stakeholder and decide how closely to involve each one.\n- Get a one-page charter approved before work starts.\n\n## The big idea\nMost projects fail at the start, not the end. A project with a fuzzy goal, open-ended scope or a forgotten stakeholder looks fine for weeks, then collapses into rework. Defining the project means writing down three things before anyone starts: what success looks like, what is in and out, and who must agree.\n\n## Goals that can be checked\n**What and why:** A **project goal** is the single outcome the project exists to produce. A goal is only useful if two people can look at the finished work and agree whether it was met. **SMART** is a test for that: a goal is Specific, Measurable, Achievable, Relevant and Time-bound.\n\n1. **Specific:** names one outcome, not a direction (\"launch the booking page\", not \"improve bookings\").\n2. **Measurable:** states the number or condition that proves it.\n3. **Achievable:** fits the people, money and time you actually have.\n4. **Relevant:** serves a reason the sponsor cares about.\n5. **Time-bound:** has a date.\n\n**Example:** \"Improve the volunteer sign-up process\" becomes \"Volunteers can sign up online in under 3 minutes by 1 March, replacing the paper form.\"\n\n**Watch out:** A goal with no number turns every review into a debate. If you can't measure it, rewrite it before you plan.\n\n## Scope: in and out\n**What and why:** **Scope** is the complete list of what the project will deliver. The **out-of-scope list** names what it won't, so that nobody assumes it. **Scope creep** is the slow addition of unplanned work without more time or money, and it is the most common reason small projects run late.\n\n1. List the **deliverables**, the tangible things handed over at the end.\n2. For each, write one line on what \"done\" means.\n3. Write the out-of-scope list: the requests you already know you are refusing or postponing.\n4. Agree on a **change process**: every new request is written down, sized, and approved or refused by the sponsor.\n\n| | In scope | Out of scope |\n|---|---|---|\n| Purpose | What you promise | What you protect yourself from |\n| Written as | Deliverables with a \"done\" line | Named features or tasks |\n| Changed by | The change process only | Moving an item in, through the change process |\n| Best when | Always | Always, especially for items stakeholders have already asked for |\n\n**Watch out:** Saying \"yes, small change\" in a hallway is how creep starts. Route every request through the change process, even the small ones.\n\n## Stakeholders\n**What and why:** A **stakeholder** is anyone who affects the project or is affected by it. The **sponsor** is the stakeholder who funds the project and makes the final call. Missing a stakeholder means discovering their requirements after you have built the wrong thing.\n\n1. List everyone who pays for, uses, approves, builds or is disrupted by the work.\n2. Rate each on **influence** (can they change the project?) and **interest** (are they affected?).\n3. Place them on a **power–interest grid** and pick an approach for each quadrant.\n\n```mermaid\nflowchart TD\n  A[List stakeholders] --> B[Rate influence and interest]\n  B --> C{Which quadrant?}\n  C --> D[High–High: manage closely]\n  C --> E[High–Low: keep satisfied]\n  C --> F[Low–High: keep informed]\n  C --> G[Low–Low: monitor]\n```\n\n**Example:** For a new office booking system, the facilities manager is high-influence and high-interest, so they review each draft. The cleaning contractor is low-influence but affected, so they get a short email before launch.\n\n## The project charter\n**What and why:** A **project charter** is a one-page document that records the goal, scope, stakeholders, budget and key dates, signed by the sponsor. It gives the project manager the authority to start and gives everyone one page to point to when memories differ.\n\nA charter contains:\n1. **Goal** in SMART form.\n2. **Scope** and the out-of-scope list.\n3. **Stakeholders** and the sponsor.\n4. **Budget** and **key dates** (milestones).\n5. **Known risks** and assumptions.\n6. **Sign-off** from the sponsor.\n\n**Watch out:** A charter that nobody signed has no authority. Get the sponsor's sign-off before you assign the first task.\n\n## Put it to work\n\n### A manager hands you a one-line request\n- [ ] Ask what problem the request solves and who asked for it.\n- [ ] Rewrite the request as a SMART goal and confirm it with the requester.\n- [ ] List three things the project will deliver and three it won't.\n- [ ] Name the sponsor and get their agreement in writing.\n\n### A stakeholder asks for \"one more thing\"\n- [ ] Thank them and write the request down.\n- [ ] Estimate its effect on time and cost.\n- [ ] Take it to the sponsor through the change process.\n- [ ] Tell the stakeholder the decision and update the scope list.\n\n### Kick-off is next week\n- [ ] Draft the charter on one page.\n- [ ] Walk the sponsor through it and collect the signature.\n- [ ] Send it to every stakeholder on the grid with their role highlighted.\n\n## Recap\n- Define the goal, scope and stakeholders before any work starts.\n- A goal is only useful if it is SMART and can be checked at the end.\n- Write what is out of scope as carefully as what is in.\n- Every new request goes through the change process.\n- Rate stakeholders by influence and interest, and engage each quadrant differently.\n- A signed one-page charter gives the project its authority.\n\n## Glossary\n| Term | Meaning |\n|---|---|\n| Change process | How new requests are logged, sized and approved or refused. |\n| Deliverables | Tangible things the project hands over at the end. |\n| Influence | A stakeholder's power to change the project. |\n| Interest | How much a stakeholder is affected by the project. |\n| Out-of-scope list | What the project explicitly will not deliver. |\n| Power–interest grid | A 2×2 grid that sets how to engage each stakeholder. |\n| Project charter | A signed one-page record of goal, scope, people, budget and dates. |\n| Project goal | The single, checkable outcome the project exists to produce. |\n| Scope creep | Unplanned work added without more time or money. |\n| Scope | The complete list of what the project will deliver. |\n| SMART | Specific, Measurable, Achievable, Relevant, Time-bound. |\n| Sponsor | The stakeholder who funds the project and decides. |\n| Stakeholder | Anyone who affects or is affected by the project. |\n", "html": null}, {"id": "m2", "kind": "module", "nav": "Scheduling and tracking", "title": "Module 2: Scheduling and tracking", "md": "> This module lets you turn a signed charter into a schedule people trust, and keep it honest once work begins.\n\n## What you'll be able to do\n- Break the scope into tasks small enough to estimate and assign.\n- Estimate each task with a range instead of a guess.\n- Find the chain of tasks that sets the finish date.\n- Report status so problems surface while they are still cheap.\n\n## The big idea\nA schedule is a forecast, not a promise. You build it from small, estimated tasks in the right order, then you watch the few tasks that decide the end date. Tracking means comparing the forecast with reality every week and acting on the gap early.\n\n## Breaking down the work\n**What and why:** A **work breakdown structure (WBS)** splits each deliverable into smaller pieces until each piece is a **task**: one action, one owner, a clear finish. Small tasks are easier to estimate, assign and check.\n\n1. Start from the deliverables in the charter.\n2. Split each into the parts needed to produce it.\n3. Keep splitting until each piece takes one person about a day to a week.\n4. Give every task an owner and a \"done\" line.\n\n**Example:** \"Online sign-up form\" splits into: write the form questions, build the form, connect it to the volunteer list, test with five volunteers, publish.\n\n**Watch out:** A task that takes a month is a phase in disguise. Split it, or it will hide its delays until the end.\n\n## Estimating with three points\n**What and why:** A single guess hides uncertainty. A **three-point estimate** asks for an optimistic (O), most likely (M) and pessimistic (P) duration, then blends them. The common blend weights the most likely case four times:\n\nEstimate = (O + 4M + P) ÷ 6\n\n| Task | O | M | P | Estimate |\n|---|---|---|---|---|\n| Build the form | 2 days | 3 days | 7 days | 3.5 days |\n| Test with volunteers | 1 day | 2 days | 3 days | 2 days |\n\n**Watch out:** Ask the person doing the task for the three numbers. Estimates you write for other people are wishes.\n\n## Dependencies and the critical path\n**What and why:** A **dependency** means one task can't start until another finishes. The **critical path** is the longest chain of dependent tasks. It sets the earliest finish date, so any delay on it delays the whole project. Tasks off the path have **float**, slack they can use without moving the end date.\n\n```mermaid\nflowchart LR\n  A[Write questions] --> B[Build form]\n  B --> D[Test]\n  C[Connect to list] --> D\n  A --> C\n  D --> E[Publish]\n```\n\n1. Draw each task and the arrows between dependent tasks.\n2. Add up durations along every path from start to finish.\n3. The longest path is the critical path. Watch it daily.\n\n**Example:** In the chart, if building the form takes longer than connecting to the list, the path through \"Build form\" is critical. A one-day slip there moves the publish date by one day.\n\n## Tracking and status reports\n**What and why:** A **status report** compares the plan with reality and asks for decisions. A **RAG status** (Red, Amber, Green) gives readers the answer in one word: Green is on track, Amber is at risk with a plan to recover, Red needs a decision from above.\n\nA good weekly report has:\n1. Overall RAG status and one sentence on why.\n2. Done this week, and next week's plan.\n3. Risks and issues, each with an owner.\n4. Decisions needed, with a deadline.\n\n**Watch out:** Projects rarely go from Green to Red. When something stays Amber two weeks running, escalate it.\n\n## Put it to work\n\n### Turning a charter into a schedule\n- [ ] Break each deliverable into tasks of a day to a week.\n- [ ] Collect three-point estimates from the task owners.\n- [ ] Draw the dependencies and mark the critical path.\n- [ ] Share the schedule with the sponsor and agree on the milestones.\n\n### A critical task slips by two days\n- [ ] Confirm the new estimate with the owner.\n- [ ] Check which later tasks and milestones move.\n- [ ] Look for float elsewhere to absorb it, or work to cut.\n- [ ] Mark the project Amber and say so in this week's report.\n\n### Writing Friday's status report\n- [ ] Set the RAG status and write the one-line reason.\n- [ ] List what finished and what starts next week.\n- [ ] Give each risk an owner and a next step.\n- [ ] State each decision you need and by when.\n\n## Recap\n- Split the work until each task has one owner and takes a day to a week.\n- Estimate with a range: (O + 4M + P) ÷ 6.\n- The critical path sets the finish date; watch it closely.\n- Float is slack that off-path tasks can use without moving the end.\n- Report status weekly with RAG, risks with owners and decisions with deadlines.\n- Escalate anything that stays Amber for two weeks.\n\n## Glossary\n| Term | Meaning |\n|---|---|\n| Critical path | The longest chain of dependent tasks; it sets the finish date. |\n| Dependency | One task can't start until another finishes. |\n| Float | Slack a task can use without moving the end date. |\n| RAG status | Red, Amber or Green summary of project health. |\n| Status report | A regular comparison of plan and reality, with decisions needed. |\n| Task | One action, one owner, a clear finish. |\n| Three-point estimate | Optimistic, likely and pessimistic durations, blended. |\n| Work breakdown structure (WBS) | Deliverables split into tasks small enough to estimate. |\n", "html": null}, {"id": "summary", "kind": "summary", "nav": "Course map", "title": "Course map", "md": "> This course lets you take a small project from a one-line request to a tracked schedule that finishes when you said it would.\n\n## How the course fits together\n**Module 1, Defining the project**, turns a request into a checkable goal, a scope with clear edges and a map of the people involved, all captured in a signed charter. Nothing gets scheduled until those three things are agreed.\n\n**Module 2, Scheduling and tracking**, breaks the charter's deliverables into estimated tasks, finds the chain that sets the finish date, and keeps the forecast honest with weekly status reports.\n\n```mermaid\nflowchart LR\n  M1[1. Define: goal, scope, people] --> C[Signed charter]\n  C --> M2[2. Schedule and track]\n  M2 --> R[Weekly status]\n```\n\n## Core ideas\n\n### A goal you can check\nA **SMART** goal is Specific, Measurable, Achievable, Relevant and Time-bound. If two people can't agree at the end whether it was met, it isn't a goal yet.\n\n### Scope has two edges\n**Scope** lists what you deliver; the **out-of-scope list** names what you won't. A **change process** decides every new request, which is what stops **scope creep**.\n\n### People before tasks\nRate every **stakeholder** by influence and interest, and engage each quadrant of the **power–interest grid** differently. The **sponsor** signs the **charter** and makes final calls.\n\n### Forecast with ranges\n**Three-point estimates** ((O + 4M + P) ÷ 6) replace single guesses. The **critical path** is the longest dependent chain and sets the finish date.\n\n### Report early\nA weekly **RAG status** report surfaces problems while they are still cheap. Two weeks of Amber means escalate.\n\n## Frameworks at a glance\n| Framework | Steps or parts | Use it when |\n|---|---|---|\n| SMART goal | Specific, Measurable, Achievable, Relevant, Time-bound | Writing or reviewing any goal |\n| Power–interest grid | Manage closely, keep satisfied, keep informed, monitor | Deciding how to involve each stakeholder |\n| Project charter | Goal, scope, stakeholders, budget and dates, risks, sign-off | Before any work starts |\n| WBS | Deliverables → parts → tasks of a day to a week | Turning scope into work |\n| Three-point estimate | O, M, P → (O + 4M + P) ÷ 6 | Estimating any uncertain task |\n| RAG status report | Status, done/next, risks, decisions | Every week |\n\n## Blueprints\n\n### Starting a project\n- [ ] Rewrite the request as a SMART goal and confirm it.\n- [ ] List what is in scope and what is out.\n- [ ] Map stakeholders on the power–interest grid.\n- [ ] Get the one-page charter signed by the sponsor.\n\n### Building the schedule\n- [ ] Break deliverables into tasks of a day to a week, each with an owner.\n- [ ] Collect three-point estimates from the owners.\n- [ ] Mark the critical path and the milestones.\n\n### Running the week\n- [ ] Send the RAG report with risks, owners and decisions.\n- [ ] Route every new request through the change process.\n- [ ] Escalate anything Amber for two weeks.\n\n## Top takeaways\n- Define before you plan: goal, scope, people.\n- A goal without a number invites endless debate.\n- The out-of-scope list protects you as much as the scope.\n- No signature, no authority.\n- Small tasks reveal delays early; month-long tasks hide them.\n- Ask task owners for estimates, as ranges.\n- Watch the critical path, not every task equally.\n- Amber twice means escalate.\n\n## Mistakes to avoid\n- Starting work before the sponsor signs the charter.\n- Accepting \"small\" changes outside the change process.\n- Forgetting a stakeholder who is affected but quiet.\n- Writing estimates for other people's tasks.\n- Leaving a project Amber week after week without escalating.\n", "html": null}, {"id": "mindmap", "kind": "mindmap", "nav": "Mind map", "title": "Mind map", "tree": {"content": "Planning a Small Project", "children": [{"content": "Module 1: Defining the project", "children": [{"content": "Goals that can be checked", "children": [{"content": "1. Specific", "children": []}, {"content": "2. Measurable", "children": []}, {"content": "3. Achievable", "children": []}, {"content": "4. Relevant", "children": []}, {"content": "5. Time-bound", "children": []}]}, {"content": "Scope: in and out", "children": [{"content": "Deliverables with a done line", "children": []}, {"content": "Out-of-scope list", "children": []}, {"content": "Change process for every request", "children": []}, {"content": "Scope creep: unplanned added work", "children": []}]}, {"content": "Stakeholders", "children": [{"content": "Rate influence and interest", "children": []}, {"content": "Power–interest grid", "children": [{"content": "Manage closely", "children": []}, {"content": "Keep satisfied", "children": []}, {"content": "Keep informed", "children": []}, {"content": "Monitor", "children": []}]}, {"content": "Sponsor makes final call", "children": []}]}, {"content": "The project charter", "children": [{"content": "Goal, scope, stakeholders", "children": []}, {"content": "Budget and key dates", "children": []}, {"content": "Risks and assumptions", "children": []}, {"content": "Sponsor sign-off", "children": []}]}]}, {"content": "Module 2: Scheduling and tracking", "children": [{"content": "Breaking down the work", "children": [{"content": "WBS from deliverables", "children": []}, {"content": "Tasks of a day to a week", "children": []}, {"content": "One owner per task", "children": []}]}, {"content": "Estimating with three points", "children": [{"content": "Optimistic, likely, pessimistic", "children": []}, {"content": "(O + 4M + P) ÷ 6", "children": []}, {"content": "Owners give the numbers", "children": []}]}, {"content": "Dependencies and the critical path", "children": [{"content": "Dependency blocks a start", "children": []}, {"content": "Longest chain sets finish date", "children": []}, {"content": "Float: slack off the path", "children": []}]}, {"content": "Tracking and status reports", "children": [{"content": "RAG: Red, Amber, Green", "children": []}, {"content": "Done and next week", "children": []}, {"content": "Risks with owners", "children": []}, {"content": "Decisions with deadlines", "children": []}]}]}]}}, {"id": "qa", "kind": "qa", "nav": "Question practice", "title": "Question practice"}], "qa": [{"id": "s1.q1", "module": 1, "question": "Which goal passes the SMART test?", "options": ["Improve the volunteer sign-up process", "Make sign-up faster and easier for everyone", "Volunteers can sign up online in under 3 minutes by 1 March", "Launch a modern sign-up experience soon"], "answer": ["C"], "multi": false, "why": "Only C names one outcome, a measure (under 3 minutes) and a date; the others are directions, not checkable goals."}, {"id": "s1.q2", "module": 1, "question": "A stakeholder stops you in the hallway and asks for one small extra report. What do you do?", "options": ["Agree, since it is small", "Refuse, since it is out of scope", "Write it down, size it and take it to the sponsor", "Add it quietly at the end of the schedule"], "answer": ["C"], "multi": false, "why": "Every request goes through the change process, however small; hallway yeses are how scope creep starts."}, {"id": "s1.q3", "module": 1, "question": "The cleaning contractor is affected by the new booking system but has little power over it. How should you engage them?", "options": ["Manage closely", "Keep satisfied", "Keep informed", "Ignore until launch"], "answer": ["C"], "multi": false, "why": "Low influence and high interest is the keep-informed quadrant of the power–interest grid."}, {"id": "s1.q4", "module": 1, "question": "Which items belong in a project charter? Select all that apply.", "options": ["The SMART goal", "The out-of-scope list", "Each task's three-point estimate", "The sponsor's sign-off"], "answer": ["A", "B", "D"], "multi": true, "why": "The charter records goal, scope, people, budget, dates, risks and sign-off; task estimates come later, in the schedule."}, {"id": "s2.q1", "module": 2, "question": "A task is estimated at O = 2, M = 3, P = 7 days. What is its three-point estimate?", "options": ["3 days", "3.5 days", "4 days", "4.5 days"], "answer": ["B"], "multi": false, "why": "(O + 4M + P) ÷ 6 = (2 + 12 + 7) ÷ 6 = 3.5 days."}, {"id": "s2.q2", "module": 2, "question": "A task off the critical path slips by one day, and it has two days of float. What happens to the finish date?", "options": ["It moves by one day", "It moves by two days", "It does not move", "The task joins the critical path immediately"], "answer": ["C"], "multi": false, "why": "Float is slack a task can use without moving the end date; one day of delay fits inside two days of float."}, {"id": "s2.q3", "module": 2, "question": "Your project has been Amber for two weekly reports in a row. What is the right next step?", "options": ["Keep it Amber until it turns Red", "Change it to Green to avoid alarm", "Escalate it and ask for a decision", "Stop sending reports until it recovers"], "answer": ["C"], "multi": false, "why": "Projects rarely jump from Green to Red; two weeks of Amber is the signal to escalate."}, {"id": "s2.q4", "module": 2, "question": "A task in your plan is estimated at five weeks. What should you do?", "options": ["Keep it; long tasks are easier to manage", "Split it into tasks of a day to a week", "Move it to the end of the schedule", "Remove it from the critical path"], "answer": ["B"], "multi": false, "why": "A month-long task is a phase in disguise; small tasks reveal delays early and can be estimated and assigned."}], "qaRemoved": []}, {"key": "python-basics", "title": "Python Basics (sample)", "pages": [{"id": "m1", "kind": "module", "nav": "Values, variables and strings", "title": "Module 1: Values, variables and strings", "md": "> This module lets you store values in variables, convert between types and build text with strings.\n\n## What you'll be able to do\n- Store values in variables and check their type.\n- Convert text to numbers and back without errors.\n- Build readable output with f-strings.\n- Slice and transform strings.\n\n## The big idea\nEvery value in Python has a **type**, and the type decides what you can do with it. You can add two numbers, but not a number and a piece of text. Most beginner errors are type errors, so knowing each value's type, and converting when needed, is the core skill of this module.\n\n## Variables and types\n**What and why:** A **variable** is a name that points to a value; `=` binds the name to it. Python works out the type from the value itself, so you never declare it. `type()` shows the type of any value.\n\n```python\nname = \"Ada\"\nage = 36\nprint(name, age)\nprint(type(name), type(age), type(3.5), type(True))\n```\nOutput:\n```\nAda 36\n\u003cclass 'str'> \u003cclass 'int'> \u003cclass 'float'> \u003cclass 'bool'>\n```\n\n| Type | Holds | Example |\n|---|---|---|\n| `str` | Text | `\"Ada\"` |\n| `int` | Whole numbers | `36` |\n| `float` | Decimal numbers | `3.5` |\n| `bool` | `True` or `False` | `True` |\n\n## Converting between types\n**What and why:** Input from users and files arrives as text (`str`), even when it looks like a number. `int()`, `float()` and `str()` convert a value to a new type so it can take part in the operation you want.\n\n```python\nprice = \"19.99\"\nqty = \"3\"\nprint(float(price) * int(qty))\nprint(str(age) + \" years\")\n```\nOutput:\n```\n59.97\n36 years\n```\n\n**Watch out:** Adding text to a number fails with `TypeError: can only concatenate str (not \"int\") to str`. Fix it by converting one side: `str(3)` for text, `int(\"3\")` for arithmetic.\n\n## f-strings\n**What and why:** An **f-string** is a string with an `f` before the quote. Anything inside `{}` is evaluated and inserted, so you can mix text and values without converting by hand. A format spec after `:` controls the display, such as `.2f` for two decimals.\n\n```python\ncity = \"Lisbon\"\nprint(f\"{name} lives in {city} and is {age}.\")\nprint(f\"Total: {float(price) * int(qty):.2f}\")\n```\nOutput:\n```\nAda lives in Lisbon and is 36.\nTotal: 59.97\n```\n\n## Working with strings\n**What and why:** A string is a sequence of characters, so you can index it, slice it and measure it. **Indexing** starts at 0, and negative indexes count from the end. A **slice** `[start:stop]` includes `start` but stops before `stop`. **Methods** like `.upper()` return a new string; the original never changes.\n\n```python\nword = \"python\"\nprint(word[0], word[-1], word[0:3], len(word))\nprint(word.upper(), word.replace(\"py\", \"PY\"))\n```\nOutput:\n```\np n pyt 6\nPYTHON PYthon\n```\n\n| Form | Does |\n|---|---|\n| `s[i]` | Character at position `i` (0 is first, -1 is last) |\n| `s[a:b]` | Characters from `a` up to, not including, `b` |\n| `len(s)` | Number of characters |\n| `s.upper()` | Copy in capitals |\n| `s.replace(old, new)` | Copy with every `old` replaced by `new` |\n\n**Watch out:** `word.upper()` does not change `word`. Assign the result (`word = word.upper()`) if you want to keep it.\n\n## Try it\n\n### Receipt line\nPrint one line of a receipt from text inputs.\n- [ ] Store an item name, a price `\"4.50\"` and a quantity `\"2\"` as strings.\n- [ ] Convert the price and quantity, and compute the total.\n- [ ] Print `Coffee x2: 9.00` with an f-string and `:.2f`.\n\n### Initials\nPrint someone's initials in capitals.\n- [ ] Store a first and last name.\n- [ ] Take the first character of each with indexing.\n- [ ] Join them and print them with `.upper()`.\n\n## Recap\n- Every value has a type; `type()` shows it.\n- Text from users and files is `str` until you convert it.\n- `int()`, `float()` and `str()` convert; mixing `str` and numbers raises `TypeError`.\n- f-strings insert values with `{}` and format them after `:`.\n- Indexes start at 0; slices stop before the end index.\n- String methods return new strings and leave the original unchanged.\n\n## Glossary\n| Term | Meaning |\n|---|---|\n| f-string | A string prefixed with `f` whose `{}` parts are evaluated. |\n| Indexing | Getting one character by position, starting at 0. |\n| Methods | Functions attached to a value, called with a dot. |\n| Slice | A part of a string from a start up to an end. |\n| Type | The kind of value, which decides what you can do with it. |\n| Variable | A name that points to a value. |\n", "html": null}, {"id": "m2", "kind": "module", "nav": "Control flow and functions", "title": "Module 2: Control flow and functions", "md": "> This module lets you write programs that make decisions, repeat work and package logic into reusable functions.\n\n## What you'll be able to do\n- Choose between paths with `if`, `elif` and `else`.\n- Repeat work over a collection with `for`, and until a condition changes with `while`.\n- Write functions with parameters, defaults and return values.\n- Read an `IndentationError` and fix it.\n\n## The big idea\nPrograms run top to bottom unless something changes the flow. Conditions choose a path, loops repeat a block, and functions name a block so you can run it again with different inputs. In Python, the block is defined by indentation, so whitespace is part of the syntax.\n\n```mermaid\nflowchart LR\n  A[Input] --> B{Condition?}\n  B -- true --> C[Run block]\n  C --> D{Loop again?}\n  D -- yes --> C\n  D -- no --> E[Return result]\n  B -- false --> E\n```\n\n## Decisions with if, elif and else\n**What and why:** `if` runs its block only when the condition is true. `elif` checks another condition when the earlier ones failed, and `else` catches everything left. Python checks from the top and runs only the first matching block.\n\n```python\ntemp = 31\nif temp > 30:\n    print(\"hot\")\nelif temp > 15:\n    print(\"mild\")\nelse:\n    print(\"cold\")\n```\nOutput:\n```\nhot\n```\n\n**Watch out:** A missing indent after the colon fails with `IndentationError: expected an indented block after 'if' statement`. Indent the block by four spaces.\n\n## Loops\n**What and why:** A **for loop** runs its block once per item in a sequence, such as a list or `range(n)`. A **while loop** repeats as long as its condition stays true, so something inside it must eventually make the condition false.\n\n```python\nfor fruit in [\"apple\", \"fig\", \"kiwi\"]:\n    print(fruit, len(fruit))\nfor i in range(3):\n    print(i)\n```\nOutput:\n```\napple 5\nfig 3\nkiwi 4\n0\n1\n2\n```\n\n```python\ncount = 3\nwhile count > 0:\n    print(count)\n    count -= 1\nprint(\"lift-off\")\n```\nOutput:\n```\n3\n2\n1\nlift-off\n```\n\n| | `for` | `while` |\n|---|---|---|\n| Repeats | Once per item | While a condition is true |\n| Stops | When the items run out | When the condition becomes false |\n| Risk | Few | An infinite loop if nothing changes the condition |\n| Best when | You know the items or the count | You wait for a state to change |\n\n**Watch out:** `range(3)` gives 0, 1 and 2, not 3. The end number is never included.\n\n## Functions\n**What and why:** A **function** is a named, reusable block defined with `def`. **Parameters** receive the inputs; a **default value** makes a parameter optional. `return` sends a result back to the caller. A function without `return` gives back `None`.\n\n```python\ndef area(width, height=1):\n    \"\"\"Return the area of a rectangle.\"\"\"\n    return width * height\n\nprint(area(4, 5))\nprint(area(4))\n```\nOutput:\n```\n20\n4\n```\n\n```python\ndef greet(name):\n    print(\"Hi\", name)\n\nresult = greet(\"Ada\")\nprint(result)\n```\nOutput:\n```\nHi Ada\nNone\n```\n\n**Watch out:** Printing is not returning. `greet` shows text but returns `None`, so `result` holds nothing useful. Use `return` when the caller needs the value.\n\n## Try it\n\n### Grade checker\nTurn a score into a grade.\n- [ ] Write `grade(score)` that returns `\"A\"` for 90 and above, `\"B\"` for 75 and above, and `\"C\"` otherwise.\n- [ ] Use `if`, `elif` and `else`.\n- [ ] Call it in a `for` loop over `[95, 80, 60]` and print each result.\n\n### Countdown function\nPackage the countdown as a function.\n- [ ] Write `countdown(n)` with a `while` loop.\n- [ ] Give `n` a default of 3.\n- [ ] Call it with and without an argument.\n\n## Recap\n- Indentation defines blocks; a missing indent is an `IndentationError`.\n- `if` / `elif` / `else` runs only the first matching branch.\n- `for` walks a sequence; `while` repeats until a condition turns false.\n- `range(n)` stops before `n`.\n- `def` names a block; parameters can have defaults.\n- `return` gives a value back; without it, the function returns `None`.\n\n## Glossary\n| Term | Meaning |\n|---|---|\n| Default value | A parameter value used when the caller gives none. |\n| For loop | Runs a block once per item in a sequence. |\n| Function | A named, reusable block defined with `def`. |\n| Parameters | Names that receive a function's inputs. |\n| While loop | Repeats a block while a condition stays true. |\n", "html": null}, {"id": "summary", "kind": "summary", "nav": "Course map", "title": "Course map", "md": "> This course lets you write small Python programs that read values, make decisions, repeat work and reuse logic.\n\n## How the course fits together\n**Module 1, Values, variables and strings**, covers what data looks like in Python: types, conversion between them, and building text with f-strings and string methods.\n\n**Module 2, Control flow and functions**, puts that data to work: conditions pick a path, loops repeat it, and functions package it for reuse.\n\n```mermaid\nflowchart LR\n  M1[1. Values and strings] --> M2[2. Control flow and functions]\n  M2 --> P[Small working programs]\n```\n\n## Core concepts\n\n### Types drive behaviour\nEvery value has a **type** (`str`, `int`, `float`, `bool`). Operations only work between compatible types, so convert with `int()`, `float()` or `str()` first.\n\n### Blocks are indentation\nA **block** is the indented code under a line ending in `:`. Conditions, loops and functions all own a block.\n\n### Return, don't print\nA **function** gives a value back with `return`. Without it, the caller gets `None`.\n\n## Workflows\n\n### Turn text input into a calculation\n1. Read the values as strings.\n2. Convert with `int()` or `float()`.\n3. Compute.\n4. Show the result with an f-string such as `f\"{total:.2f}\"`.\n\n### Write a reusable function\n1. `def name(params):` with defaults where useful.\n2. Put the logic in the indented block.\n3. `return` the result.\n4. Call it with different arguments.\n\n## Errors and fixes\n| Symptom | Cause | Fix |\n|---|---|---|\n| `TypeError: can only concatenate str (not \"int\") to str` | Adding text and a number | Convert one side with `str()` or `int()` |\n| `IndentationError: expected an indented block` | No indented block after `:` | Indent the block by four spaces |\n| Function result is `None` | The function prints instead of returning | Add `return` |\n| Loop misses the last number | `range(n)` stops before `n` | Use `range(n + 1)` |\n\n## Cheat sheet\n| Command / function | Does | Example |\n|---|---|---|\n| `type(x)` | Shows the type | `type(3.5)` |\n| `int()` / `float()` / `str()` | Convert | `float(\"19.99\")` |\n| f-string | Insert and format values | `f\"Total: {t:.2f}\"` |\n| `s[i]`, `s[a:b]` | Index and slice | `word[0:3]` |\n| `len(s)` | Length | `len(\"python\")` |\n| `.upper()`, `.replace()` | New transformed string | `word.replace(\"py\", \"PY\")` |\n| `if` / `elif` / `else` | Choose a branch | `if temp > 30:` |\n| `for x in seq` | Repeat per item | `for i in range(3):` |\n| `while cond` | Repeat while true | `while count > 0:` |\n| `def f(a, b=1)` | Define a function | `def area(width, height=1):` |\n| `return` | Send a value back | `return width * height` |\n", "html": null}, {"id": "mindmap", "kind": "mindmap", "nav": "Mind map", "title": "Mind map", "tree": {"content": "Python Basics", "children": [{"content": "Module 1: Values, variables and strings", "children": [{"content": "Variables and types", "children": [{"content": "`=` binds a name", "children": []}, {"content": "`type()` shows the type", "children": []}, {"content": "`str`, `int`, `float`, `bool`", "children": []}]}, {"content": "Converting between types", "children": [{"content": "Input arrives as `str`", "children": []}, {"content": "`int()`, `float()`, `str()`", "children": []}, {"content": "Mixing types raises `TypeError`", "children": []}]}, {"content": "f-strings", "children": [{"content": "`f&quot;{value}&quot;` inserts values", "children": []}, {"content": "`:.2f` for two decimals", "children": []}]}, {"content": "Working with strings", "children": [{"content": "Index from 0, `-1` is last", "children": []}, {"content": "`s[a:b]` stops before `b`", "children": []}, {"content": "`len()`, `.upper()`, `.replace()`", "children": []}, {"content": "Methods return new strings", "children": []}]}]}, {"content": "Module 2: Control flow and functions", "children": [{"content": "Decisions with if, elif and else", "children": [{"content": "First true branch runs", "children": []}, {"content": "`else` catches the rest", "children": []}, {"content": "Indent blocks four spaces", "children": []}]}, {"content": "Loops", "children": [{"content": "`for` once per item", "children": []}, {"content": "`while` until condition false", "children": []}, {"content": "`range(n)` excludes `n`", "children": []}]}, {"content": "Functions", "children": [{"content": "`def name(params):`", "children": []}, {"content": "Defaults make parameters optional", "children": []}, {"content": "`return` sends a value back", "children": []}, {"content": "No return gives `None`", "children": []}]}]}]}}, {"id": "qa", "kind": "qa", "nav": "Question practice", "title": "Question practice"}], "qa": [{"id": "p1.q1", "module": 1, "question": "price = \"19.99\" and qty = \"3\". Which line prints 59.97?", "options": ["print(price * qty)", "print(float(price) * int(qty))", "print(price + qty)", "print(str(price) * 3)"], "answer": ["B"], "multi": false, "why": "Both values are strings; only converting with float() and int() makes the multiplication arithmetic."}, {"id": "p1.q2", "module": 1, "question": "word = \"python\". What does print(word[0:3], word[-1]) show?", "options": ["pyt n", "pyth n", "pyt p", "yth n"], "answer": ["A"], "multi": false, "why": "A slice stops before its end index, so [0:3] is \"pyt\"; index -1 is the last character, \"n\"."}, {"id": "p1.q3", "module": 1, "question": "print(\"Age: \" + 36) fails. Which fixes work? Select all that apply.", "options": ["print(\"Age: \" + str(36))", "print(f\"Age: {36}\")", "print(\"Age: \" + int(36))", "print(\"Age:\", 36)"], "answer": ["A", "B", "D"], "multi": true, "why": "Converting to str, an f-string, or passing separate arguments to print all avoid adding str to int."}, {"id": "p1.q4", "module": 1, "question": "After word = \"python\"; word.upper(), what is word?", "options": ["\"PYTHON\"", "\"python\"", "\"Python\"", "None"], "answer": ["B"], "multi": false, "why": "String methods return a new string; the original is unchanged unless you assign the result back."}, {"id": "p2.q1", "module": 2, "question": "temp = 20. Which line does the if/elif/else from the module print?", "options": ["hot", "mild", "cold", "mild and cold"], "answer": ["B"], "multi": false, "why": "20 fails temp > 30, passes temp > 15, and only the first matching branch runs."}, {"id": "p2.q2", "module": 2, "question": "What does for i in range(3): print(i) print?", "options": ["1 2 3", "0 1 2 3", "0 1 2", "1 2"], "answer": ["C"], "multi": false, "why": "range(n) starts at 0 and stops before n."}, {"id": "p2.q3", "module": 2, "question": "def greet(name): print(\"Hi\", name). What is result after result = greet(\"Ada\")?", "options": ["\"Hi Ada\"", "\"Ada\"", "None", "An error"], "answer": ["C"], "multi": false, "why": "The function prints but has no return, so it returns None."}, {"id": "p2.q4", "module": 2, "question": "def area(width, height=1): return width * height. What is area(4)?", "options": ["4", "5", "None", "TypeError"], "answer": ["A"], "multi": false, "why": "height falls back to its default of 1, so the result is 4 × 1."}], "qaRemoved": []}], "images": {}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.2/dist/browser/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+<script id="appjs">
+(function(){
+var S=JSON.parse(document.getElementById('state').textContent);
+var cur=null, art=null, saveTimer=null, dirty=false, qaModule='', mm=null, openCourses={}, pendingScroll=0;
+var IDLE_MS=4000;
+try{openCourses=JSON.parse(localStorage.getItem('nb-open')||'{}')}catch(_){}
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function pages(){var out=[];S.courses.forEach(function(c){c.pages.forEach(function(p){out.push({c:c,p:p})})});return out}
+function find(id){var f=null;pages().forEach(function(x){if(x.c.key+'-'+x.p.id===id)f=x});return f}
+var $=function(id){return document.getElementById(id)};
+
+/* ---------- content rendering ---------- */
+function renderMd(md){
+  var d=document.createElement('div');
+  d.innerHTML=window.marked?marked.parse(md,{gfm:true}):'<pre>'+esc(md)+'</pre>';
+  d.querySelectorAll('pre>code.language-mermaid').forEach(function(c){var m=document.createElement('div');m.className='mermaid';m.textContent=c.textContent;c.parentNode.replaceWith(m)});
+  d.querySelectorAll('table').forEach(function(t){var w=document.createElement('div');w.className='tablewrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+  d.querySelectorAll('img').forEach(function(img){var k=img.getAttribute('src');if(S.images[k]){img.setAttribute('data-key',k)}});
+  d.querySelectorAll('h2').forEach(function(h){if(/mistake/i.test(h.textContent)){var n=h.nextElementSibling;if(n&&n.tagName==='UL')n.classList.add('mistakes')}});
+  d.querySelectorAll('p').forEach(function(p){var s=p.firstElementChild;if(s&&s.tagName==='STRONG'&&p.firstChild===s){var t=s.textContent;if(/^Example/i.test(t))p.className='callout ex';else if(/^Watch out/i.test(t))p.className='callout warn'}});
+  d.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener'});
+  var i=0;d.querySelectorAll('li input[type=checkbox]').forEach(function(cb){cb.removeAttribute('disabled');cb.setAttribute('data-i',i++);cb.parentNode.classList.add('task')});
+  return d.innerHTML;
+}
+function hydrate(root){
+  root.querySelectorAll('img[data-key]').forEach(function(img){var u=S.images[img.getAttribute('data-key')];if(u)img.src=u});
+  root.querySelectorAll('li.task input').forEach(function(cb){cb.setAttribute('contenteditable','false')});
+  root.querySelectorAll('.mermaid').forEach(function(m){m.setAttribute('contenteditable','false')});
+  if(window.mermaid){try{mermaid.initialize({startOnLoad:false,theme:'neutral'});mermaid.run({nodes:root.querySelectorAll('.mermaid:not([data-processed])')})}catch(_){}}
+  root.querySelectorAll('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener'});
+}
+function pageHtml(p){return p.html||renderMd(p.md||'')}
+function serialize(root){
+  var d=root.cloneNode(true);
+  d.querySelectorAll('img[data-key]').forEach(function(img){img.setAttribute('src',img.getAttribute('data-key'))});
+  d.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable')});
+  d.querySelectorAll('[data-ph]').forEach(function(n){n.removeAttribute('data-ph')});
+  return d.innerHTML;
+}
+
+/* ---------- layout ---------- */
+function nav(){
+  var curCourse=(find(cur)||{c:{}}).c.key;
+  var h='<div class="brand"><i>S</i><span>Study Notebook</span><button class="ghost menu" id="menu" aria-label="Show pages">Pages</button></div><div class="nav">';
+  S.courses.forEach(function(c,ci){
+    var open=openCourses.hasOwnProperty(c.key)?openCourses[c.key]:c.key===curCourse;
+    h+='<button class="course" data-c="'+esc(c.key)+'" aria-expanded="'+open+'"><span class="chev" aria-hidden="true">▶</span><span>Course '+(ci+1)+' · '+esc(c.title)+'</span></button><div'+(open?'':' hidden')+'>';
+    c.pages.forEach(function(p){
+      var id=c.key+'-'+p.id, ico={module:'▤',summary:'◎',mindmap:'✦',qa:'?'}[p.kind]||'·';
+      h+='<a href="#'+id+'"'+(id===cur?' aria-current="page"':'')+' data-id="'+id+'"><span class="ico" aria-hidden="true">'+ico+'</span><span>'+esc(p.kind==='module'?p.id.replace('m','')+'. '+(p.nav||p.title):(p.nav||p.title))+'</span></a>';
+    });
+    h+='</div>';
+  });
+  return h+'</div>';
+}
+function topbar(x,extra){
+  return '<div class="topbar"><span class="crumb">'+esc(x.c.title)+' / '+esc(x.p.nav||x.p.title)+'</span><span class="saved" id="saved">'+(art?'':'Read-only here')+'</span>'+(art&&art.local?'<button class="ghost" id="savecopy" title="Download this notebook with your edits">Save copy</button>':'')+(extra||'')+'</div>';
+}
+function view(){
+  var x=find(cur);if(!x)return '<div class="page"><p class="empty">No pages yet.</p></div>';
+  var p=x.p,c=x.c;
+  if(p.kind==='qa')return qaView(x);
+  if(p.kind==='mindmap')return topbar(x)+'<div class="page wide"><h1 class="title">'+esc(p.title)+'</h1><div class="qa-tools"><button class="btn" id="mmexp">Expand all</button><button class="btn" id="mmcol">Modules only</button><button class="btn" id="mmfit">Fit to screen</button><span class="count">Click a node to open or close it · scroll to zoom · drag to move</span></div><div class="mm"><svg id="mmsvg"></svg></div></div>';
+  return topbar(x,art?'<button class="dots" id="pagemenu" aria-label="Page options" title="Page options">···</button>':'')+
+    '<div class="page"><h1 class="title">'+esc(p.title)+'</h1><div class="docwrap" id="docwrap"><article class="doc" id="doc"'+(art?' contenteditable="true" spellcheck="true"':'')+'>'+pageHtml(p)+'</article>'+
+    '<div class="handle" id="handle"><button id="hplus" title="Add a block below" aria-label="Add a block below">+</button><button id="hgrip" title="Block options" aria-label="Block options">⋮⋮</button></div></div></div>';
+}
+function qaView(x){
+  var c=x.c,removed=c.qaRemoved||[],qs=c.qa.filter(function(q){return removed.indexOf(q.id)<0&&(!qaModule||String(q.module)===qaModule)});
+  var mods=[];c.qa.forEach(function(q){if(mods.indexOf(q.module)<0)mods.push(q.module)});
+  var h=topbar(x)+'<div class="page"><h1 class="title">'+esc(x.p.title)+'</h1><p class="lede">Pick an answer to check it. Real questions from the course, with the basic ones left out.</p>'+
+    '<div class="qa-tools"><select id="qmod" aria-label="Filter by module"><option value="">All modules</option>'+mods.sort().map(function(m){return '<option value="'+m+'"'+(String(m)===qaModule?' selected':'')+'>Module '+m+'</option>'}).join('')+'</select>'+
+    '<button class="btn" id="revealall">Show all answers</button>'+(removed.length&&art?'<button class="btn" id="restoreq">Restore deleted ('+removed.length+')</button>':'')+'<span class="count">'+qs.length+' questions</span></div>';
+  if(!qs.length)h+='<p class="empty">No questions here.</p>';
+  qs.forEach(function(q){
+    h+='<div class="q" data-q="'+esc(q.id)+'"><div class="meta"><span class="tag">Module '+q.module+'</span>'+(q.multi?'<span class="tag multi">Select all that apply</span>':'')+'<span class="sp"></span>'+
+      (art?'<button class="dots" data-qmenu="'+esc(q.id)+'" aria-label="Question options" title="Question options">···</button>':'')+'</div>'+
+      '<p>'+esc(q.question)+'</p><ol>'+q.options.map(function(o,i){return '<li class="opt" tabindex="0" role="button" data-l="'+String.fromCharCode(65+i)+'">'+esc(o)+'</li>'}).join('')+'</ol>'+
+      (q.multi?'<button class="btn primary" data-check>Check</button> ':'')+'<button class="ghost" data-show>Show answer</button>'+
+      '<div class="why" hidden><span class="verdict"></span>Answer: <strong>'+q.answer.join(', ')+'</strong>'+(q.why?' — '+esc(q.why):'')+'</div></div>';
+  });
+  return h+'</div>';
+}
+function render(keepScroll){
+  closePops();
+  $('root').innerHTML='<aside class="side" id="side">'+nav()+'</aside><main class="main">'+view()+'</main>';
+  document.title=(find(cur)?find(cur).p.title+' · ':'')+'Study Notebook';
+  var doc=$('doc');if(doc)hydrate(doc);
+  wire();
+  window.scrollTo(0,keepScroll?pendingScroll:0);
+}
+function setSaved(t){var s=$('saved');if(s)s.textContent=t}
+
+/* ---------- saving (the artifact republishes itself) ---------- */
+function captureDoc(){var doc=$('doc'),x=find(cur);if(doc&&x&&x.p.kind!=='qa'){x.p.html=serialize(doc)}}
+function changed(){dirty=true;setSaved('Editing…');clearTimeout(saveTimer);saveTimer=setTimeout(flush,IDLE_MS)}
+function flush(){clearTimeout(saveTimer);if(!dirty)return;captureDoc();dirty=false;save()}
+function doc_(){
+  var css=$('css').textContent,js=$('appjs').textContent,state=JSON.stringify(S).replace(/</g,'\\u003c');
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>'+
+    '<title>Study Notebook</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">\n'+
+    '<style id="css">'+css+'</style>\n<div class="shell" id="root"></div>\n<script id="state" type="application/json">'+state+'<\/script>\n'+
+    '<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"><\/script>\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"><\/script>\n<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.2/dist/browser/index.js"><\/script>\n<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"><\/script>\n<script id="appjs">'+js+'<\/script>\n</body></html>';
+}
+function save(){
+  if(!art){setSaved('Read-only here');return}
+  setSaved('Saving…');
+  art.publish(doc_()).then(function(){setSaved(art.local?'Saved in this browser':'Saved')}).catch(function(e){var c=e&&e.code;setSaved(c==='conflict'?'Another copy saved first':(c==='not_granted'||c==='not_writer')?'Read-only here':'Not saved, retrying on next edit');if(c!=='conflict'&&c!=='not_granted'&&c!=='not_writer')dirty=true})
+}
+
+/* ---------- wiring ---------- */
+function bind(id,fn){var el=$(id);if(el)el.onclick=fn}
+function go(id){flush();cur=id;try{history.replaceState(null,'','#'+cur)}catch(_){}render()}
+function wire(){
+  document.querySelectorAll('.nav a').forEach(function(a){a.onclick=function(e){e.preventDefault();go(a.dataset.id)}});
+  bind('menu',function(){$('side').classList.toggle('open')});
+  document.querySelectorAll('.course').forEach(function(b){b.onclick=function(){var k=b.dataset.c,open=b.getAttribute('aria-expanded')!=='true';openCourses[k]=open;try{localStorage.setItem('nb-open',JSON.stringify(openCourses))}catch(_){}b.setAttribute('aria-expanded',String(open));b.nextElementSibling.hidden=!open}});
+  if($('doc'))wireDoc();
+  if($('mmsvg'))drawMap();
+  if(document.querySelector('.q')||$('qmod'))wireQa();
+}
+
+/* ---------- Notion-style editor ---------- */
+var hovered=null;
+function blockOf(node){var doc=$('doc');while(node&&node.parentNode!==doc){node=node.parentNode}return node&&node.parentNode===doc?node:null}
+function wireDoc(){
+  var doc=$('doc'),wrap=$('docwrap'),handle=$('handle');
+  doc.addEventListener('change',function(e){if(e.target.matches('li.task input')){if(e.target.checked)e.target.setAttribute('checked','');else e.target.removeAttribute('checked');changed()}});
+  if(!art)return;
+  doc.addEventListener('input',function(e){changed();
+    if(e.inputType==='insertText'&&e.data==='/'){var s=getSelection(),b=s.rangeCount&&blockOf(s.anchorNode);if(b)slashOpen(b,true)}
+    else if(document.querySelector('.pop.slash')&&(e.data===' '||e.inputType.indexOf('delete')===0))closePops()});
+  doc.addEventListener('keydown',function(e){
+    var pop=document.querySelector('.pop.slash');
+    if(pop){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();moveSel(pop,e.key==='ArrowDown'?1:-1);return}
+      if(e.key==='Enter'){e.preventDefault();var on=pop.querySelector('button.on');if(on)on.click();return}
+      if(e.key==='Escape'){closePops();return}}
+    if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();flush()}
+  });
+  doc.addEventListener('blur',function(){setTimeout(function(){if(!document.querySelector('.pop')&&document.activeElement!==doc)flush()},200)});
+  wrap.addEventListener('mousemove',function(e){
+    var b=blockOf(document.elementFromPoint(Math.max(e.clientX,doc.getBoundingClientRect().left+4),e.clientY));
+    if(!b||document.querySelector('.pop'))return;
+    hovered=b;var wr=wrap.getBoundingClientRect(),br=b.getBoundingClientRect();
+    handle.style.display='flex';handle.style.top=(br.top-wr.top+(b.tagName==='H2'?6:0))+'px';handle.style.left='-50px';
+  });
+  wrap.addEventListener('mouseleave',function(){if(!document.querySelector('.pop'))handle.style.display='none'});
+  bind('hplus',function(){if(!hovered)return;var p=document.createElement('p');p.setAttribute('data-ph',"Type '/' for blocks");hovered.after(p);caretIn(p);slashOpen(p)});
+  bind('hgrip',function(e){if(hovered)blockMenu(hovered,e.currentTarget)});
+  document.addEventListener('selectionchange',selbarUpdate);
+  bind('pagemenu',function(e){var x=find(cur);popup(e.currentTarget,[
+    {lbl:'Page'},
+    {k:'↺',t:'Restore original page',dis:!x.p.html,fn:function(){x.p.html=null;dirty=false;render();save()}},
+    {k:'⌘S',t:'Save now',fn:function(){dirty=true;flush()}}],true)});
+}
+function caretIn(el,atStart){var r=document.createRange();r.selectNodeContents(el);r.collapse(!!atStart);var s=getSelection();s.removeAllRanges();s.addRange(r);el.focus&&el.closest('[contenteditable]')&&el.closest('[contenteditable]').focus()}
+function blockMenu(b,anchor){
+  var turn=function(tag){var n=document.createElement(tag);n.innerHTML=b.innerHTML;b.replaceWith(n);hovered=n;changed()};
+  popup(anchor,[
+    {lbl:'Turn into'},{k:'T',t:'Text',fn:function(){turn('p')}},{k:'H',t:'Heading',fn:function(){turn('h2')}},{k:'h',t:'Subheading',fn:function(){turn('h3')}},
+    {hr:1},
+    {k:'⧉',t:'Duplicate',fn:function(){var n=b.cloneNode(true);b.after(n);changed()}},
+    {k:'↑',t:'Move up',fn:function(){if(b.previousElementSibling){b.previousElementSibling.before(b);changed()}}},
+    {k:'↓',t:'Move down',fn:function(){if(b.nextElementSibling){b.nextElementSibling.after(b);changed()}}},
+    {hr:1},
+    {k:'🗑',t:'Delete',danger:1,fn:function(){b.remove();$('handle').style.display='none';changed()}}
+  ]);
+}
+function popup(anchor,items,alignRight,cls){
+  closePops();var pop=document.createElement('div');pop.className='pop'+(cls?' '+cls:'');
+  items.forEach(function(it){
+    if(it.lbl){var l=document.createElement('div');l.className='lbl';l.textContent=it.lbl;pop.appendChild(l);return}
+    if(it.hr){pop.appendChild(document.createElement('hr'));return}
+    if(it.dis)return;
+    var b=document.createElement('button');b.innerHTML='<span class="k">'+esc(it.k||'')+'</span><span>'+esc(it.t)+'</span>';if(it.danger)b.className='danger';
+    b.onmousedown=function(e){e.preventDefault()};b.onclick=function(){closePops();it.fn()};pop.appendChild(b);
+  });
+  document.body.appendChild(pop);
+  var r=anchor.getBoundingClientRect?anchor.getBoundingClientRect():anchor;
+  var left=alignRight?r.right-pop.offsetWidth:r.left;left=Math.max(8,Math.min(left,innerWidth-pop.offsetWidth-8));
+  pop.style.left=(left+scrollX)+'px';pop.style.top=(r.bottom+6+scrollY)+'px';
+  setTimeout(function(){document.addEventListener('mousedown',outside)},0);
+  return pop;
+}
+function outside(e){if(!e.target.closest('.pop')&&!e.target.closest('.selbar')){closePops()}}
+function closePops(){document.querySelectorAll('.pop').forEach(function(p){p.remove()});document.removeEventListener('mousedown',outside)}
+function moveSel(pop,d){var bs=[].slice.call(pop.querySelectorAll('button')),i=bs.findIndex(function(b){return b.classList.contains('on')});bs.forEach(function(b){b.classList.remove('on')});bs[(i+d+bs.length)%bs.length].classList.add('on')}
+
+/* Slash menu: typing '/' anywhere opens it (as in Notion). Choosing a block removes the '/',
+   then turns the line into that block if the line is empty, or adds the block below it. */
+function slashOpen(b,typed){
+  var make=function(html,focusSel){
+    if(typed)document.execCommand('delete');
+    var t=document.createElement('div');t.innerHTML=html;var n=t.firstChild;
+    if(b.textContent.trim()==='')b.replaceWith(n);else b.after(n);
+    var f=focusSel?n.querySelector(focusSel):n;caretIn(f||n);changed()};
+  var sel=getSelection(),r=sel.rangeCount?sel.getRangeAt(0).getBoundingClientRect():b.getBoundingClientRect();
+  if(!r.height)r=b.getBoundingClientRect();
+  var pop=popup({left:r.left,right:r.right,bottom:r.bottom},[
+    {lbl:'Basic blocks'},
+    {k:'T',t:'Text',fn:function(){make('<p data-ph="Type something"></p>')}},
+    {k:'H',t:'Heading',fn:function(){make('<h2 data-ph="Heading"></h2>')}},
+    {k:'h',t:'Subheading',fn:function(){make('<h3 data-ph="Subheading"></h3>')}},
+    {k:'•',t:'Bulleted list',fn:function(){make('<ul><li data-ph="List"></li></ul>','li')}},
+    {k:'1.',t:'Numbered list',fn:function(){make('<ol><li data-ph="List"></li></ol>','li')}},
+    {k:'☐',t:'To-do',fn:function(){make('<ul><li class="task"><input type="checkbox" contenteditable="false"><span data-ph="To-do"></span></li></ul>','span')}},
+    {k:'💡',t:'Callout',fn:function(){make('<p class="callout note" data-ph="Callout"></p>')}},
+    {k:'—',t:'Divider',fn:function(){if(typed)document.execCommand('delete');var hr=document.createElement('hr'),p=document.createElement('p');p.setAttribute('data-ph',"Type '/' for blocks");if(b.textContent.trim()==='')b.replaceWith(hr);else b.after(hr);hr.after(p);caretIn(p);changed()}}
+  ],false,'slash');
+  pop.querySelector('button').classList.add('on');
+}
+
+/* Floating toolbar on text selection */
+function selbarUpdate(){
+  var old=document.querySelector('.selbar'),s=getSelection(),doc=$('doc');
+  if(!doc||!s.rangeCount||s.isCollapsed||!doc.contains(s.anchorNode)){if(old)old.remove();return}
+  var r=s.getRangeAt(0).getBoundingClientRect();if(!r.width){if(old)old.remove();return}
+  var bar=old||document.createElement('div');
+  if(!old){bar.className='selbar';
+    [['B','Bold',function(){document.execCommand('bold');changed()}],['I','Italic',function(){document.execCommand('italic');changed()}],
+     ['A','Highlight',function(){mark();changed()}],['Ā','Remove highlight',function(){unmark();changed()}]].forEach(function(d){
+      var b=document.createElement('button');b.textContent=d[0];b.title=d[1];b.setAttribute('aria-label',d[1]);if(d[0]==='I')b.style.fontStyle='italic';if(d[0]==='A')b.style.background='var(--mark)';
+      b.onmousedown=function(e){e.preventDefault()};b.onclick=d[2];bar.appendChild(b)});
+    document.body.appendChild(bar)}
+  bar.style.left=Math.max(8,r.left+scrollX+r.width/2-bar.offsetWidth/2)+'px';bar.style.top=(r.top+scrollY-bar.offsetHeight-8)+'px';
+}
+function mark(){var s=getSelection();if(!s.rangeCount||s.isCollapsed)return;var r=s.getRangeAt(0),m=document.createElement('mark');try{r.surroundContents(m)}catch(_){m.appendChild(r.extractContents());r.insertNode(m)}s.removeAllRanges()}
+function unmark(){var s=getSelection();if(!s.rangeCount)return;var r=s.getRangeAt(0),doc=$('doc');
+  [].slice.call(doc.querySelectorAll('mark')).forEach(function(m){if(r.intersectsNode(m)){var p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m)}})}
+
+/* ---------- questions ---------- */
+function qData(q){return find(cur).c.qa.filter(function(x){return x.id===q.dataset.q})[0]}
+function wireQa(){
+  var qm=$('qmod');if(qm)qm.onchange=function(){qaModule=qm.value;render()};
+  bind('revealall',function(){document.querySelectorAll('.q').forEach(function(q){reveal(q,true)})});
+  bind('restoreq',function(){find(cur).c.qaRemoved=[];render();save()});
+  document.querySelectorAll('[data-show]').forEach(function(b){b.onclick=function(){reveal(b.closest('.q'))}});
+  document.querySelectorAll('[data-check]').forEach(function(b){b.onclick=function(){var q=b.closest('.q');if(!q.querySelector('li.picked')){var w=q.querySelector('.why');w.hidden=false;q.querySelector('.verdict').textContent='Pick at least one option first. ';return}grade(q)}});
+  document.querySelectorAll('.q li.opt').forEach(function(li){
+    var act=function(){var q=li.closest('.q');if(q.classList.contains('done'))return;
+      if(qData(q).multi){li.classList.toggle('picked')}else{q.querySelectorAll('li').forEach(function(x){x.classList.remove('picked')});li.classList.add('picked');grade(q)}};
+    li.onclick=act;li.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}};
+  });
+  document.querySelectorAll('[data-qmenu]').forEach(function(b){b.onclick=function(){var id=b.dataset.qmenu;popup(b,[
+    {k:'↺',t:'Reset this question',fn:function(){var q=b.closest('.q');q.classList.remove('done');q.querySelectorAll('li').forEach(function(li){li.className='opt'});q.querySelector('.why').hidden=true;var c=q.querySelector('[data-check]');if(c)c.hidden=false;q.querySelector('[data-show]').textContent='Show answer'}},
+    {hr:1},
+    {k:'🗑',t:'Delete question',danger:1,fn:function(){var x=find(cur);x.c.qaRemoved=(x.c.qaRemoved||[]).concat([id]);pendingScroll=scrollY;render(true);save()}}],true)}});
+}
+function grade(q){
+  var data=qData(q),picked=[].map.call(q.querySelectorAll('li.picked'),function(li){return li.dataset.l}).sort(),ok=picked.join()===data.answer.slice().sort().join();
+  q.classList.add('done');
+  q.querySelectorAll('li').forEach(function(li){var right=data.answer.indexOf(li.dataset.l)>=0,was=li.classList.contains('picked');li.classList.remove('picked');li.classList.toggle('right',right);li.classList.toggle('wrong',!right&&was)});
+  var v=q.querySelector('.verdict');v.textContent=ok?'Correct. ':'Not quite. ';v.style.color=ok?'var(--success)':'var(--error)';
+  q.querySelector('.why').hidden=false;q.querySelector('[data-show]').textContent='Hide answer';var c=q.querySelector('[data-check]');if(c)c.hidden=true;
+}
+function reveal(q,force){
+  var w=q.querySelector('.why'),open=force||w.hidden,data=qData(q);w.hidden=!open;q.querySelector('[data-show]').textContent=open?'Hide answer':'Show answer';
+  if(!q.classList.contains('done'))q.querySelectorAll('li').forEach(function(li){li.classList.toggle('right',open&&data.answer.indexOf(li.dataset.l)>=0)});
+}
+
+/* ---------- mind map ---------- */
+function drawMap(){
+  var page=find(cur).p,svg=$('mmsvg');
+  if(!window.markmap||!window.markmap.Markmap||!page.tree){svg.outerHTML='<p class="empty">The mind map viewer could not load here.</p>';return}
+  var make=function(level){svg.innerHTML='';mm=window.markmap.Markmap.create(svg,{initialExpandLevel:level,maxWidth:280,duration:250,spacingVertical:8,paddingX:12},JSON.parse(JSON.stringify(page.tree)))};
+  make(3);bind('mmexp',function(){make(-1)});bind('mmcol',function(){make(2)});bind('mmfit',function(){if(mm)mm.fit()});
+}
+
+/* ---------- boot ---------- */
+window.addEventListener('beforeunload',flush);
+document.addEventListener('visibilitychange',function(){if(document.hidden)flush()});
+function start(snap){
+  snap=snap||{};
+  cur=snap.cur||(location.hash||'').slice(1)||null;
+  if(!cur||!find(cur)){var f0=pages()[0];cur=f0?f0.c.key+'-'+f0.p.id:null}
+  pendingScroll=snap.scroll||0;
+  render(true);
+}
+/* Outside the Claude app (a file or any web page): keep edits in this browser, and offer a full copy as a download. */
+if(!(window.claude&&window.claude.use)){
+  var LKEY='nb-edits:'+location.pathname;
+  try{var ed=JSON.parse(localStorage.getItem(LKEY)||'null');if(ed)S.courses.forEach(function(c){
+    c.pages.forEach(function(p){var h=ed.pages[c.key+'-'+p.id];if(h)p.html=h});
+    if(ed.qaRemoved[c.key])c.qaRemoved=ed.qaRemoved[c.key]})}catch(_){}
+  art={local:true,publish:function(){
+    var ed={pages:{},qaRemoved:{}};
+    S.courses.forEach(function(c){c.pages.forEach(function(p){if(p.html)ed.pages[c.key+'-'+p.id]=p.html});ed.qaRemoved[c.key]=c.qaRemoved||[]});
+    try{localStorage.setItem(LKEY,JSON.stringify(ed));return Promise.resolve()}catch(e){return Promise.reject(e)}}};
+  document.addEventListener('click',function(e){if(e.target&&e.target.id==='savecopy'){
+    flush();var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([doc_()],{type:'text/html'}));
+    a.download='notebook.html';a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}});
+}
+var hot=window.claude&&window.claude.hot;
+if(hot&&hot.snapshot)hot.snapshot(function(){return {cur:cur,scroll:scrollY}});
+if(hot&&hot.ready)hot.ready(start);else start(hot&&hot.data||{});
+if(window.claude&&claude.use){claude.use('artifact').then(function(a){if(a){art=a;pendingScroll=scrollY;render(true)}}).catch(function(){})}
+})();
+</script>

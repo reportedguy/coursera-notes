@@ -1,0 +1,9 @@
+{
+  "type": "business",
+  "role": "a senior project manager",
+  "level": "beginner",
+  "outcomes": ["Define a project's goal, scope and stakeholders", "Build a schedule and keep it on track"],
+  "emphasis": ["Scope statement", "SMART goals", "Work breakdown", "Three-point estimates", "Status reporting"],
+  "flags": {"code": false, "formulas": false, "vocab": false, "exam": false},
+  "why": "Sample course: frameworks, documents and checklists dominate; no code or formulas beyond one estimate."
+}

@@ -1,0 +1,41 @@
+name: Bug report
+description: Something broke or a page came out wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "**Never paste course content** (transcripts, readings, quiz text, page text from a real course). Describe it instead."
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: "`notebook doctor` output"
+      render: text
+  - type: input
+    id: stopped
+    attributes:
+      label: STOPPED message (if any)
+      placeholder: "STOPPED (progress saved): ..."
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options: [Claude Code (desktop app), Claude Code (CLI), Codex CLI, Gemini CLI, CLI only, Other]
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: Windows 11 / macOS 15 / Ubuntu 24.04
+  - type: input
+    id: profile
+    attributes:
+      label: Course type (profile) if it's about page quality
+      placeholder: technical

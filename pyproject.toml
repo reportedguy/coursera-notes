@@ -1,5 +1,5 @@
 [project]
-name = "study-notebook"
+name = "coursera-notes"
 version = "0.2.0"
 description = "Turn the Coursera courses you're enrolled in into one editable study notebook, written by your own AI agent"
 readme = "README.md"

@@ -1,0 +1,9 @@
+{
+  "type": "technical",
+  "role": "a senior Python engineer",
+  "level": "beginner",
+  "outcomes": ["Store and transform data with variables and strings", "Write programs that decide, repeat and reuse code"],
+  "emphasis": ["Types and conversion", "f-strings", "if/elif/else", "for and while loops", "Functions and return values"],
+  "flags": {"code": true, "formulas": false, "vocab": false, "exam": false},
+  "why": "Sample course: every lesson has the learner type and run code."
+}

@@ -13,6 +13,8 @@ from pathlib import Path
 BLOCKED_EXT = {".vtt", ".srt", ".har", ".apkg", ".mp4", ".webm", ".m4a"}
 BLOCKED_DIRS = ("sv-data/", "data/", "vault/", "raw/", "norm/", "user-notes/", "pages/", "work/", "notebook/")
 MAX_BYTES = 500_000
+# README images and the demo GIF, built from the original samples in examples/: exempt from the size cap only.
+DEMO_ASSETS = ("docs/assets/",)
 # Markers that appear in captured course content or session cookies.
 CONTENT_MARKERS = re.compile(rb"coursera\.org/learn/[^\s)]+/(lecture|supplement|quiz|exam)/|CAUTH=")
 # Files allowed to mention the markers (code and docs that describe them).
@@ -29,7 +31,7 @@ def problems(path: Path) -> list[str]:
     if rel.startswith(BLOCKED_DIRS):
         found.append("inside a course-data folder")
     if path.is_file():
-        if path.stat().st_size > MAX_BYTES:
+        if path.stat().st_size > MAX_BYTES and not rel.startswith(DEMO_ASSETS):
             found.append(f"larger than {MAX_BYTES // 1000} KB")
         if CONTENT_MARKERS.search(path.read_bytes()):
             found.append("contains Coursera item URLs or a session cookie")
